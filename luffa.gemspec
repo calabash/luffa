@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'awesome_print', '~> 1.2'
   spec.add_dependency 'json', '~> 1.8'
   spec.add_dependency 'retriable', '< 2.0', '>= 1.3.3.1'
+  spec.add_dependency 'thor', '~> 0.19'
 
   spec.add_development_dependency 'yard', '~> 0.8'
   spec.add_development_dependency 'redcarpet', '~> 3.1'
