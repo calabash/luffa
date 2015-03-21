@@ -8,6 +8,7 @@ rvm:
 script:
   - bundle update
   - bundle exec rake spec
+  - rake install
 
 notifications:
   email: false
