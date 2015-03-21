@@ -1,14 +1,13 @@
 language: objective-c
 
-before_script:
-
 rvm:
   - 1.9.3
   - 2.1.5
   - 2.2.1
 
 script:
+  - bundle update
+  - bundle exec rake spec
 
 notifications:
   email: false
-
