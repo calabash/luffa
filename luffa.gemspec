@@ -5,7 +5,9 @@ require 'luffa/version'
 
 ruby_files = Dir.glob('{lib,bin}/**/*.rb')
 doc_files =  ['README.md', 'LICENSE', 'CONTRIBUTING.md', 'VERSIONING.md']
-gem_files = ruby_files + doc_files
+plists = Dir.glob('script/ci/*.plist')
+
+gem_files = ruby_files + doc_files + plists
 
 Gem::Specification.new do |spec|
   spec.name          = 'luffa'
