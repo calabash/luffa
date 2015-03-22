@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'luffa/cli/cli'
-require 'luffa/version'
 
 begin
   Luffa::CLI.start

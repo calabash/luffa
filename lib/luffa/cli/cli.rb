@@ -1,5 +1,4 @@
 require 'thor'
-require 'luffa/cli/cli'
 require 'luffa'
 
 trap 'SIGINT' do
