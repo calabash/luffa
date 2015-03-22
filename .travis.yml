@@ -6,6 +6,7 @@ rvm:
   - 2.2.1
 
 script:
+  - cp script/ci/.gemrc ~/.gemrc
   - bundle update
   - bundle exec rake spec
   - rake install

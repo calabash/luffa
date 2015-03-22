@@ -1,0 +1,3 @@
+install: --no-document --env-shebang
+update:  --no-document --env-shebang
+
