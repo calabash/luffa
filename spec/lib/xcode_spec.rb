@@ -19,6 +19,17 @@ describe Luffa::Xcode do
     end
   end
 
+  it '.with_xcode_install' do
+    installs = xcode.xcode_installs
+    installs.each do |install|
+      Luffa::Xcode.with_xcode_install(install) do
+        install_version = install.version
+        active_version = Luffa::Xcode.new.active_xcode.version
+        expect(install_version).to be == active_version
+      end
+    end
+  end
+
   it '#xcode_select_path' do
     expect(xcode.xcode_select_path).not_to be == nil
   end

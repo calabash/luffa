@@ -36,6 +36,10 @@ module Luffa
       end
     end
 
+    def self.with_xcode_install(xcode_install, &block)
+      self.with_developer_dir(xcode_install.path, &block)
+    end
+
     def xcode_installs
       @xcode_installs ||= lambda do
         min_xcode_version = Luffa::Version.new('5.1.1')
