@@ -77,4 +77,16 @@ describe Luffa::Environment do
       expect(subject.developer_dir).to be == '/Some/path'
     end
   end
+
+  describe '.debug?' do
+    it "returns true when DEBUG == '1'" do
+      stub_env('DEBUG', '1')
+      expect(Luffa::Environment.debug?).to be == true
+    end
+
+    it "returns false when DEBUG != '1'" do
+      stub_env('DEBUG', 1)
+      expect(Luffa::Environment.debug?).to be == false
+    end
+  end
 end
