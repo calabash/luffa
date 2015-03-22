@@ -13,5 +13,19 @@ module Luffa
     def self.ci?
       self.travis_ci? || self.jenkins_ci?
     end
+
+    def self.developer_dir
+      value = ENV['DEVELOPER_DIR']
+      if value && value != ''
+        value
+      else
+        nil
+      end
+    end
+
+    # Returns true if debugging is enabled.
+    def self.debug?
+      ENV['DEBUG'] == '1'
+    end
   end
 end

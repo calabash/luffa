@@ -58,4 +58,35 @@ describe Luffa::Environment do
       expect(subject.ci?).to be == false
     end
   end
+
+  describe '.developer_dir' do
+    describe 'returns nil' do
+      it 'when DEVELOPER_DIR is nil' do
+        stub_env({'DEVELOPER_DIR' => nil})
+        expect(subject.developer_dir).to be == nil
+      end
+
+      it 'when DEVELOPER_DIR is empty' do
+        stub_env('DEVELOPER_DIR', '')
+        expect(subject.developer_dir).to be == nil
+      end
+    end
+
+    it 'returns DEVELOPER_DIR' do
+      stub_env('DEVELOPER_DIR', '/Some/path')
+      expect(subject.developer_dir).to be == '/Some/path'
+    end
+  end
+
+  describe '.debug?' do
+    it "returns true when DEBUG == '1'" do
+      stub_env('DEBUG', '1')
+      expect(Luffa::Environment.debug?).to be == true
+    end
+
+    it "returns false when DEBUG != '1'" do
+      stub_env('DEBUG', 1)
+      expect(Luffa::Environment.debug?).to be == false
+    end
+  end
 end
