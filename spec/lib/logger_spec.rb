@@ -1,4 +1,4 @@
-describe Luffa do
+describe 'Luffa Logging' do
   it 'log_unix_cmd' do
     capture_stdout { Luffa.log_unix_cmd 'Hey!' }
   end
