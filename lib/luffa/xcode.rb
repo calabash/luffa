@@ -57,5 +57,9 @@ module Luffa
     def xcode_select_path
       @xcode_select_dir ||= `xcode-select --print-path`.strip
     end
+
+    def active_xcode
+      @active_xcode ||= Luffa::XcodeInstall.new(active_xcode_dir)
+    end
   end
 end

@@ -35,6 +35,10 @@ describe Luffa::Xcode do
       expect(xcode.active_xcode_dir).to be == dev_dir
     end
   end
+
+  it '#active_xcode' do
+    expect(xcode.active_xcode).to be_a_kind_of(Luffa::XcodeInstall)
+  end
 end
 
 describe Luffa::XcodeInstall do
