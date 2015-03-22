@@ -31,7 +31,6 @@ module Luffa
     env_vars = merged_opts[:env_vars]
     res = system(env_vars, cmd)
     exit_code = $?.exitstatus
-
     if res
       Luffa.log_pass merged_opts[:pass_msg]
     else
