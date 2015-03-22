@@ -1,7 +1,6 @@
 require 'thor'
 require 'luffa/cli/cli'
-require 'luffa/environment'
-require 'luffa/unix_command'
+require 'luffa'
 
 trap 'SIGINT' do
   puts 'Exiting'
