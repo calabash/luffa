@@ -17,7 +17,7 @@ IRB.conf[:HISTORY_FILE] = '.irb-history'
 
 module Luffa
   module IRBRC
-    def message_of_the_day
+    def self.message_of_the_day
       motd=["Let's get this done!", 'Ready to rumble.', 'Enjoy.', 'Remember to breathe.',
             'Take a deep breath.', "Isn't it time for a break?", 'Can I get you a coffee?',
             'What is a calabash anyway?', 'Smile! You are on camera!', 'Let op! Wild Rooster!',
@@ -28,3 +28,4 @@ module Luffa
   end
 end
 
+Luffa::IRBRC.message_of_the_day
