@@ -9,6 +9,7 @@ script:
   - bundle update
   - bundle exec rake spec
   - rake install
+  - luffa authorize
 
 notifications:
   email: false
