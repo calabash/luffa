@@ -39,6 +39,12 @@ describe Luffa::Xcode do
   it '#active_xcode' do
     expect(xcode.active_xcode).to be_a_kind_of(Luffa::XcodeInstall)
   end
+
+  it '#xcode_installs' do
+    installs = xcode.xcode_installs
+    expect(installs).to be_a_kind_of(Array)
+    expect(installs.count).to be >= 1
+  end
 end
 
 describe Luffa::XcodeInstall do

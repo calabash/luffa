@@ -6,7 +6,6 @@ module Luffa
     def initialize(path)
       Luffa::Xcode.with_developer_dir(path) do
         @version = lambda {
-          puts "path = #{path}"
           xcode_build_output = `xcrun xcodebuild -version`.split(/\s/)[1]
           Luffa::Version.new(xcode_build_output)
         }.call
@@ -25,16 +24,34 @@ module Luffa
   end
 
   class Xcode
+
     def self.with_developer_dir(developer_dir, &block)
       original_developer_dir = Luffa::Environment.developer_dir
       stripped = developer_dir.strip
       begin
-        ENV.delete('DEVELOPER_DIR')
         ENV['DEVELOPER_DIR'] = stripped
         block.call
       ensure
         ENV['DEVELOPER_DIR'] = original_developer_dir
       end
+    end
+
+    def xcode_installs
+      @xcode_installs ||= lambda do
+        min_xcode_version = Luffa::Version.new('5.1.1')
+        active_xcode = Luffa::Xcode.new.active_xcode
+        xcodes = [active_xcode]
+        Dir.glob('/Xcode/*/*.app/Contents/Developer').each do |path|
+          xcode_version = path[/(\d\.\d(\.\d)?)/, 0]
+          if Luffa::Version.new(xcode_version) >= min_xcode_version
+            install = Luffa::XcodeInstall.new(path)
+            unless install == active_xcode
+              xcodes << install
+            end
+          end
+        end
+        xcodes
+      end.call
     end
 
     # The developer dir at the time the tests start.
