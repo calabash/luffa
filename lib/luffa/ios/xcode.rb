@@ -40,6 +40,13 @@ module Luffa
       self.with_developer_dir(xcode_install.path, &block)
     end
 
+    def self.ios_version_incompatible_with_xcode_version?(ios_version, xcode_version)
+      [(ios_version >= Luffa::Version.new('8.0') && xcode_version < Luffa::Version.new('6.0')),
+       (ios_version >= Luffa::Version.new('8.1') && xcode_version < Luffa::Version.new('6.1')),
+       (ios_version >= Luffa::Version.new('8.2') && xcode_version < Luffa::Version.new('6.2')),
+       (ios_version >= Luffa::Version.new('8.3') && xcode_version < Luffa::Version.new('6.3'))].any?
+    end
+
     def xcode_installs
       @xcode_installs ||= lambda do
         min_xcode_version = Luffa::Version.new('5.1.1')
