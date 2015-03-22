@@ -1,21 +1,16 @@
-language: ruby
-
-before_script:
-  - ./copy_repos.sh
-  - ./changing_old_files.sh
+language: objective-c
 
 rvm:
-  - 2.0.0
-  - 2.1.2
+  - 1.9.3
+  - 2.1.5
+  - 2.2.1
 
 script:
-  - script/ci/travis/install-gem-ci.rb
+  - cp script/ci/.gemrc ~/.gemrc
+  - bundle update
   - bundle exec rake spec
+  - rake install
+  - luffa authorize
 
 notifications:
-  email:
-    recipients:
-      - joshua.moody@xamarin.com
-      - tobias.roikjer@xamarin.com
-    on_success: change
-    on_failure: always
+  email: false
