@@ -3,6 +3,7 @@ require 'irb/ext/save-history'
 require 'awesome_print'
 require 'pry'
 require 'pry-nav'
+require 'luffa'
 
 AwesomePrint.irb!
 

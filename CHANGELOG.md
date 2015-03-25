@@ -1,3 +1,7 @@
+### 1.0.2
+
+Fix Luffa.log\_info color.
+
 ### 1.0.1
 
 Add script/.gemrc to gemspec
