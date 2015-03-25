@@ -16,6 +16,6 @@ module Luffa
   end
 
   def self.log_info(msg)
-    puts "\033[46mINFO: #{msg}\033[0m" if msg
+    puts "\033[35mINFO: #{msg}\033[0m" if msg
   end
 end
