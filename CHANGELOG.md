@@ -1,3 +1,7 @@
+### 1.0.3
+
+Add a bridge between Retriable 1.x and 2.x support
+
 ### 1.0.2
 
 Fix Luffa.log\_info color.
