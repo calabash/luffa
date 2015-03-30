@@ -1,3 +1,8 @@
+### 1.0.4
+
+* Complete singleton pattern for Luffa::Simulator
+* Fixup retriable 1.x to 2.x bridge
+
 ### 1.0.3
 
 Add a bridge between Retriable 1.x and 2.x support
