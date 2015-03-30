@@ -1,4 +1,5 @@
 require 'retriable'
+require 'retriable/version'
 
 module Luffa
   # A class to bridge the gap between retriable 1.x and 2.0.
