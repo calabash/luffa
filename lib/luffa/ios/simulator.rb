@@ -2,6 +2,9 @@ require 'singleton'
 
 module Luffa
   class Simulator
+
+    include Singleton
+
     def core_simulator_home_dir
       @core_simulator_home_dir ||= File.expand_path('~/Library/Developer/CoreSimulator')
     end
