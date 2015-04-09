@@ -16,6 +16,14 @@ IRB.conf[:SAVE_HISTORY] = 100
 # Store results in home directory with specified file name
 IRB.conf[:HISTORY_FILE] = '.irb-history'
 
+def quiet
+  ENV.delete('DEBUG')
+end
+
+def verbose
+  ENV['DEBUG'] = '1'
+end
+
 module Luffa
   module IRBRC
     def self.message_of_the_day
