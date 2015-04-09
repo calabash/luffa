@@ -1,3 +1,7 @@
+### 1.0.5
+
+* Fixup ideviceinstaller wrapper
+
 ### 1.0.4
 
 * Complete singleton pattern for Luffa::Simulator
