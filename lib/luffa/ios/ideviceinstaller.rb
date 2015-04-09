@@ -101,11 +101,16 @@ module Luffa
       # not, appear when calling $ xcrun instruments -s devices. For the
       # purposes of testing, we will only try to connect to devices that are
       # connected via USB.
+      #
+      # Also idevice_id, which ideviceinstaller relies on, will sometimes report
+      # devices 2x which will cause ideviceinstaller to fail.
       @physical_devices_for_testing ||= lambda {
         devices = xcode_tools.instruments(:devices)
         if idevice_id_available?
           white_list = `#{idevice_id_bin_path} -l`.strip.split("\n")
-          devices.select { | device | white_list.include?(device.udid) }
+          devices.select do | device |
+            white_list.include?(device.udid) && white_list.count(device.udid) == 1
+          end
         else
           devices
         end
