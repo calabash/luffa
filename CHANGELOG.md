@@ -1,3 +1,7 @@
+### 1.0.6
+
+* Improve ideviceinstaller API
+
 ### 1.0.5
 
 * Fixup ideviceinstaller wrapper
