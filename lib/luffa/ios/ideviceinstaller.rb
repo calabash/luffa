@@ -44,17 +44,15 @@ module Luffa
       #
       # Also idevice_id, which ideviceinstaller relies on, will sometimes report
       # devices 2x which will cause ideviceinstaller to fail.
-      @physical_devices_for_testing ||= lambda {
-        devices = xcode_tools.instruments(:devices)
-        if self.idevice_id_available?
-          white_list = `#{idevice_id_bin_path} -l`.strip.split("\n")
-          devices.select do | device |
-            white_list.include?(device.udid) && white_list.count(device.udid) == 1
-          end
-        else
-          devices
+      devices = xcode_tools.instruments(:devices)
+      if self.idevice_id_available?
+        white_list = `#{idevice_id_bin_path} -l`.strip.split("\n")
+        devices.select do | device |
+          white_list.include?(device.udid) && white_list.count(device.udid) == 1
         end
-      }.call
+      else
+        devices
+      end
     end
 
     private
