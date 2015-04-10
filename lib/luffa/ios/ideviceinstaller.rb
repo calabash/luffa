@@ -13,12 +13,12 @@ module Luffa
     end
 
     def self.ideviceinstaller_available?
-      path = bin_path
-      path and File.exist? bin_path
+      path = self.bin_path
+      path and File.exist? self.bin_path
     end
 
     def self.idevice_id_available?
-      path = idevice_id_bin_path
+      path = self.idevice_id_bin_path
       path and File.exist? path
     end
 
@@ -45,8 +45,8 @@ module Luffa
       # Also idevice_id, which ideviceinstaller relies on, will sometimes report
       # devices 2x which will cause ideviceinstaller to fail.
       devices = xcode_tools.instruments(:devices)
-      if self.idevice_id_available?
-        white_list = `#{idevice_id_bin_path} -l`.strip.split("\n")
+      if IDeviceInstaller.idevice_id_available?
+        white_list = `#{self.idevice_id_bin_path} -l`.strip.split("\n")
         devices.select do | device |
           white_list.include?(device.udid) && white_list.count(device.udid) == 1
         end
@@ -59,14 +59,14 @@ module Luffa
 
     DEFAULT_OPTIONS =  { :timeout => 10.0, :tries => 2 }
 
-    def bin_path
-      @bin_path ||= `which ideviceinstaller`.chomp!
+    def self.bin_path
+      @@bin_path ||= `which ideviceinstaller`.chomp!
     end
 
     def run_command_with_args(args, options={})
       merged_options = DEFAULT_OPTIONS.merge(options)
 
-      cmd = "#{bin_path} #{args.join(' ')}"
+      cmd = "#{IDeviceInstaller.bin_path} #{args.join(' ')}"
       Luffa.log_unix_cmd(cmd) if Luffa::Environment.debug?
 
       exit_status = nil
@@ -89,7 +89,7 @@ module Luffa
 
       Retriable.retriable({tries: tries, on: on, on_retry: on_retry} ) do
         Timeout.timeout(timeout, TimeoutError) do
-          Open3.popen3(bin_path, *args) do  |_, stdout,  stderr, process_status|
+          Open3.popen3(IDeviceInstaller.bin_path, *args) do  |_, stdout,  stderr, process_status|
             err = stderr.read.strip
             if err && err != ''
               unless err[/iTunesMetadata.plist/,0] || err[/SC_Info/,0]
@@ -150,8 +150,8 @@ module Luffa
       true
     end
 
-    def idevice_id_bin_path
-      @idevice_id_bin_path ||= `which idevice_id`.chomp!
+    def self.idevice_id_bin_path
+      @@idevice_id_bin_path ||= `which idevice_id`.chomp!
     end
   end
 end
