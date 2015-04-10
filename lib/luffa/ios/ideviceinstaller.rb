@@ -12,12 +12,12 @@ module Luffa
       @bundle_id = bundle_id
     end
 
-    def ideviceinstaller_available?
+    def self.ideviceinstaller_available?
       path = bin_path
       path and File.exist? bin_path
     end
 
-    def idevice_id_available?
+    def self.idevice_id_available?
       path = idevice_id_bin_path
       path and File.exist? path
     end
@@ -36,7 +36,7 @@ module Luffa
     end
 
     # Can only be called when RunLoop is available.
-    def physical_devices_for_testing(xcode_tools)
+    def self.physical_devices_for_testing(xcode_tools)
       # Xcode 6 + iOS 8 - devices on the same network, whether development or
       # not, appear when calling $ xcrun instruments -s devices. For the
       # purposes of testing, we will only try to connect to devices that are
@@ -46,7 +46,7 @@ module Luffa
       # devices 2x which will cause ideviceinstaller to fail.
       @physical_devices_for_testing ||= lambda {
         devices = xcode_tools.instruments(:devices)
-        if idevice_id_available?
+        if self.idevice_id_available?
           white_list = `#{idevice_id_bin_path} -l`.strip.split("\n")
           devices.select do | device |
             white_list.include?(device.udid) && white_list.count(device.udid) == 1
