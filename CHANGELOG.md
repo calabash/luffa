@@ -1,3 +1,7 @@
+### 1.0.7
+
+* Fixup ideviceinstaller static/class interactions
+
 ### 1.0.6
 
 * Improve ideviceinstaller API
