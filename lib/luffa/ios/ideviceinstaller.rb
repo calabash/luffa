@@ -23,12 +23,12 @@ module Luffa
     end
 
     def install(udid, options={})
-      unless options.is_a? Hash
+      if options.is_a? Hash
+        merged_options = DEFAULT_OPTIONS.merge(options)
+      else
         Luffa.log_warn 'API CHANGE: install now takes an options hash as 2nd arg'
         Luffa.log_warn "API CHANGE: ignoring '#{options}'; will use defaults"
         merged_options = DEFAULT_OPTIONS
-      else
-        merged_options = DEFAULT_OPTIONS.merge(options)
       end
 
       uninstall(udid, merged_options)
