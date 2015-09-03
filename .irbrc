@@ -12,9 +12,36 @@ ARGV.concat [ '--readline',
               'simple']
 
 IRB.conf[:SAVE_HISTORY] = 100
-
-# Store results in home directory with specified file name
 IRB.conf[:HISTORY_FILE] = '.irb-history'
+
+IRB.conf[:AUTO_INDENT] = true
+
+IRB.conf[:PROMPT][:LUFFA] = {
+  :PROMPT_I => "luffa #{Luffa::VERSION}> ",
+  :PROMPT_N => "luffa #{Luffa::VERSION}> ",
+  :PROMPT_S => nil,
+  :PROMPT_C => "> ",
+  :AUTO_INDENT => true,
+  :RETURN => "%s\n"
+}
+
+IRB.conf[:PROMPT_MODE] = :LUFFA
+
+begin
+  require 'pry'
+  Pry.config.history.should_save = false
+  Pry.config.history.should_load = false
+  require 'pry-nav'
+rescue LoadError => _
+
+end
+
+puts ''
+puts '#       =>  Useful Methods  <=          #'
+puts '> quiet       => Turn off DEBUG logging.'
+puts '> verbose     => Turn on DEBUG logging.'
+puts ''
+
 
 def quiet
   ENV.delete('DEBUG')
@@ -38,3 +65,4 @@ module Luffa
 end
 
 Luffa::IRBRC.message_of_the_day
+
