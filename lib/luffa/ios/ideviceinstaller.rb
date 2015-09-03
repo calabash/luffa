@@ -81,9 +81,9 @@ module Luffa
       on_retry = Proc.new do |_, try, elapsed_time, next_interval|
         # Retriable 2.0
         if elapsed_time && next_interval
-          Luffa.log_info "LLDB: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
+          Luffa.log_info "ideviceinstaller: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
         else
-          Luffa.log_info "LLDB: attempt #{try} failed; will retry"
+          Luffa.log_info "ideviceinstaller: attempt #{try} failed; will retry"
         end
       end
 
