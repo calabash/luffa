@@ -31,14 +31,39 @@ describe 'Luffa.unix_command' do
 
   it 'can set ENV vars' do
     path = "#{Dir.mktmpdir}/out.txt"
-    exit_code = nil
-    capture_stdout {
-      exit_code = Luffa.unix_command("echo $FOOBAR > #{path}",
-                                  {:env_vars => {'FOOBAR' => 'foobar'}})
-    }
 
+    exit_code = Luffa.unix_command("echo $FOOBAR > #{path}",
+                                   {:env_vars => {'FOOBAR' => 'foobar'}})
     expect(exit_code).to be == 0
     actual = File.open(path, 'rb').read.strip
     expect(actual).to be == 'foobar'
   end
+
+  describe 'splitting command' do
+    describe 'raises error' do
+      let(:options) { {:split_cmd => true} }
+
+      it 'contains |' do
+        cmd = 'command with | to another'
+        expect do
+          Luffa.unix_command(cmd, options)
+        end.to raise_error RuntimeError, /Cannot split command/
+      end
+
+      it 'contains >' do
+        cmd = 'command with > to output'
+        expect do
+          Luffa.unix_command(cmd, options)
+        end.to raise_error RuntimeError, /Cannot split command/
+      end
+
+      it 'contains &' do
+        cmd = 'command with & to output'
+        expect do
+          Luffa.unix_command(cmd, options)
+        end.to raise_error RuntimeError, /Cannot split command/
+      end
+    end
+  end
 end
+
