@@ -5,7 +5,8 @@ module Luffa
                     :exit_on_nonzero_status => true,
                     :env_vars => {},
                     :log_cmd => true,
-                    :obscure_fields => []}
+                    :obscure_fields => [],
+                    :split_cmd => false}
     merged_opts = default_opts.merge(opts)
 
     obscure_fields = merged_opts[:obscure_fields]
@@ -29,8 +30,22 @@ module Luffa
     end
 
     env_vars = merged_opts[:env_vars]
-    res = system(env_vars, cmd)
+
+    if merged_opts[:split_cmd]
+      ['|', '>', '&'].each do |character|
+        if cmd.include?(character)
+          raise "Cannot split command '#{cmd}' because it contains character '#{character}'"
+        end
+      end
+
+      tokens = cmd.split(' ')
+      res = system(env_vars, tokens.shift, *tokens)
+    else
+      res = system(env_vars, cmd)
+    end
+
     exit_code = $?.exitstatus
+
     if res
       Luffa.log_pass merged_opts[:pass_msg]
     else
@@ -41,3 +56,4 @@ module Luffa
     exit_code
   end
 end
+

@@ -1,3 +1,8 @@
+### 1.1.0
+
+* Respond to deprecated RunLoop::XCTools
+* Unix: can optionally split unix command #24
+
 ### 1.0.7
 
 * Fixup ideviceinstaller static/class interactions
