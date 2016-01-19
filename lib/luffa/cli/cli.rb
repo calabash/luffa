@@ -38,28 +38,23 @@ module Luffa
       kill_domain = 'com.apple.dt.instruments.process.kill'
       kill_args = ['security', 'authorizationdb', 'write', kill_domain]
 
-      if Luffa::Environment.travis_ci?
-        cmd = "sudo #{analysis_args.join(' ')} < \"#{analysis_plist}\""
-        options = {
-              :pass_msg => 'Wrote analysis.plist',
-              :fail_msg => 'Could not write analysis.plist',
-              :exit_on_nonzero_status => false
-        }
-        analysis_code = Luffa.unix_command(cmd, options)
+      cmd = "sudo #{analysis_args.join(' ')} < \"#{analysis_plist}\""
+      options = {
+        :pass_msg => 'Wrote analysis.plist',
+        :fail_msg => 'Could not write analysis.plist',
+        :exit_on_nonzero_status => false
+      }
+      analysis_code = Luffa.unix_command(cmd, options)
 
-        cmd = "sudo #{kill_args.join(' ')} < \"#{kill_plist}\""
-        options = {
-              :pass_msg => 'Wrote kill.plist',
-              :fail_msg => 'Could not write kill.plist',
-              :exit_on_nonzero_status => false
-        }
+      cmd = "sudo #{kill_args.join(' ')} < \"#{kill_plist}\""
+      options = {
+        :pass_msg => 'Wrote kill.plist',
+        :fail_msg => 'Could not write kill.plist',
+        :exit_on_nonzero_status => false
+      }
 
-        kill_code = Luffa.unix_command(cmd, options)
-        analysis_code == 0 && kill_code == 0
-      else
-        puts "Skipping 'security authorizationdb write' because it requires sudo"
-        true
-      end
+      kill_code = Luffa.unix_command(cmd, options)
+      analysis_code == 0 && kill_code == 0
     end
   end
 end
