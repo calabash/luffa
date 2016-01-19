@@ -1,3 +1,9 @@
+### 2.0.0
+
+* Requires ruby >= 2.0
+* Allow `luffa authorize` to be run anywhere
+
+
 ### 1.1.0
 
 * Respond to deprecated RunLoop::XCTools
