@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://xamarin.com/test-cloud'
   spec.license       = 'EPL-1.0'
 
-  spec.required_ruby_version = '>= 1.9'
+  spec.required_ruby_version = ">= 2.0"
   spec.version       = Luffa::VERSION
   spec.platform      = Gem::Platform::RUBY
 
@@ -50,7 +50,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard-rspec', '~> 4.3'
   spec.add_development_dependency 'guard-bundler', '~> 2.0'
   spec.add_development_dependency 'growl', '~> 1.0'
-  spec.add_development_dependency 'rb-readline', '~> 0.5'
   spec.add_development_dependency 'stub_env', '>= 1.0.1', '< 2.0'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'pry-nav'
