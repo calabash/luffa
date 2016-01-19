@@ -14,3 +14,6 @@ script:
 
 notifications:
   email: false
+  slack:
+    rooms:
+      secure: Uw8FBYmJjNZhLmEB/2T4VYfm2QrbCjErXiKS86J8VRt2pEC85cCC/ZGzgL+4l7gSOuRf1JpiFYqKMjTHO1kvLGRdDuCTZoOgq2KqXmiratV3jwwLqinBmQSA4aUMuqQTjBB15D80XkoXPVYYoH/kwiKjffMCpKvd6OIIdY2BrNU=
