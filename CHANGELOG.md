@@ -1,3 +1,7 @@
+### 2.1.0
+
+Allow any version of json.
+
 ### 2.0.0
 
 * Requires ruby >= 2.0
