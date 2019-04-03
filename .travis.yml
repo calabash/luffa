@@ -1,8 +1,12 @@
 language: objective-c
 
+osx_image: xcode10.2
+
 rvm:
-  - 2.1.7
-  - 2.2.3
+  - 2.6.2
+  - 2.5.5
+  - 2.4.5
+  - 2.3.8
 
 script:
   - cp script/ci/.gemrc ~/.gemrc
