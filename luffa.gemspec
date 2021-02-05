@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'awesome_print'
-  spec.add_dependency 'json'
+  spec.add_dependency 'json', '2.5.1'
   spec.add_dependency 'retriable', '< 2.1', '>= 1.3.3.1'
   spec.add_dependency 'thor', '~> 0.19'
 
@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'travis'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rake', '~> 10.3'
+  spec.add_development_dependency 'rake', '~> 13.0.3'
   spec.add_development_dependency 'guard-rspec', '~> 4.3'
   spec.add_development_dependency 'guard-bundler', '~> 2.0'
   spec.add_development_dependency 'growl', '~> 1.0'
